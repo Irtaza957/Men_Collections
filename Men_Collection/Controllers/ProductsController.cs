@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Men_Collection.Data;
 using Men_Collection.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Men_Collection.Controllers
 {
@@ -27,6 +28,7 @@ namespace Men_Collection.Controllers
         }
 
         // GET: Products/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,6 +48,7 @@ namespace Men_Collection.Controllers
         }
 
         // GET: Products/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "name");
@@ -57,6 +60,7 @@ namespace Men_Collection.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("product_id,name,image,price,CategoryId")] Product product)
         {
             if (ModelState.IsValid)
@@ -70,6 +74,7 @@ namespace Men_Collection.Controllers
         }
 
         // GET: Products/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -91,6 +96,7 @@ namespace Men_Collection.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("product_id,name,image,price,CategoryId")] Product product)
         {
             if (id != product.product_id)
@@ -123,6 +129,7 @@ namespace Men_Collection.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -155,6 +162,18 @@ namespace Men_Collection.Controllers
         private bool ProductExists(int id)
         {
             return _context.Product.Any(e => e.product_id == id);
+        }
+        public async Task<IActionResult> Store()
+        {
+            return View(await _context.Product.ToListAsync());
+        }
+        public async Task<IActionResult> SearchResult(string name)
+        {
+            return View("Index", await _context.Product.Where(a => a.name.Contains(name)).ToListAsync());
+        }
+        public IActionResult Search()
+        {
+            return View();
         }
     }
 }

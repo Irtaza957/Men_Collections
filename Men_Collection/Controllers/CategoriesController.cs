@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Men_Collection.Data;
 using Men_Collection.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Men_Collection.Controllers
 {
@@ -26,6 +27,7 @@ namespace Men_Collection.Controllers
         }
 
         // GET: Categories/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -54,6 +56,7 @@ namespace Men_Collection.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,name")] Category category)
         {
             if (ModelState.IsValid)
@@ -66,6 +69,7 @@ namespace Men_Collection.Controllers
         }
 
         // GET: Categories/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +90,7 @@ namespace Men_Collection.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,name")] Category category)
         {
             if (id != category.Id)
@@ -117,6 +122,7 @@ namespace Men_Collection.Controllers
         }
 
         // GET: Categories/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

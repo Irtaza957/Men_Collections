@@ -20,7 +20,7 @@
             @Html.DisplayNameFor(model => model.image)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.image)
+            <img src="@Html.DisplayFor(model => model.image)" alt="@Html.DisplayFor(model => model.name)" height="80px" width="120px" class="rounded-circle">
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.price)

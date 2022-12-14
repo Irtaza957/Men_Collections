@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Men_Collection.Models.Product>
+
+@{
+    ViewData["Title"] = "Store";
+}
+<style>
+    .card {
+    cursor: pointer;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top:10px;
+    
+}
+
+   .card:hover {
+        box-shadow: -2px -1px 25px -4px rgba(0,0,0,0.75);
+        transition: 0.5s;
+    }
+</style>
+<div class="text-center">
+    <h1 class="display-4">Products</h1>
+</div>
+<div class="row">
+    @foreach (var product in Model)
+    {        
+        <div class="col-lg-4 text-center card">
+            <a asp-controller="Products" asp-action="Details" asp-route-id="@product.product_id">            
+            <div class="border-0 bg-light">
+                <div class="card-body">
+                    <img src="@product.image" alt="@product.name" height="200px" width="300px">
+                </div>
+            </div>
+            </a>
+            <a asp-controller="Products" asp-action="Details" asp-route-id="@product.product_id">
+            <h6>@product.name</h6>
+            </a>
+            <p>$@product.price</p>
+            <button>Add to Cart</button>
+            </div>      
+    }
+</div>
