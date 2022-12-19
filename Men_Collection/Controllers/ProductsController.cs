@@ -27,8 +27,7 @@ namespace Men_Collection.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Products/Details/5
-        [Authorize]
+        // GET: Products/Details/5             
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,8 +46,7 @@ namespace Men_Collection.Controllers
             return View(product);
         }
 
-        // GET: Products/Create
-        [Authorize]
+        // GET: Products/Create       
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "name");
@@ -59,8 +57,7 @@ namespace Men_Collection.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
+        [ValidateAntiForgeryToken]       
         public async Task<IActionResult> Create([Bind("product_id,name,image,price,CategoryId")] Product product)
         {
             if (ModelState.IsValid)
@@ -73,8 +70,7 @@ namespace Men_Collection.Controllers
             return View(product);
         }
 
-        // GET: Products/Edit/5
-        [Authorize]
+        // GET: Products/Edit/5        
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -95,8 +91,7 @@ namespace Men_Collection.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
+        [ValidateAntiForgeryToken]      
         public async Task<IActionResult> Edit(int id, [Bind("product_id,name,image,price,CategoryId")] Product product)
         {
             if (id != product.product_id)
@@ -128,8 +123,7 @@ namespace Men_Collection.Controllers
             return View(product);
         }
 
-        // GET: Products/Delete/5
-        [Authorize]
+        // GET: Products/Delete/5       
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

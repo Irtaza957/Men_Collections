@@ -15,5 +15,6 @@ namespace Men_Collection.Data
         }
         public DbSet<Men_Collection.Models.Product> Product { get; set; }
         public DbSet<Men_Collection.Models.Category> Category { get; set; }
+        public DbSet<Men_Collection.Models.Order> Order { get; set; }
     }
 }

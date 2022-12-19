@@ -8,7 +8,7 @@
 }
 
 <h1>Index</h1>
-@if (SignInManager.IsSignedIn(User))
+@if (SignInManager.IsSignedIn(User) && User.Identity.Name=="admin@gmail.com")
 {
     <p>
         <a asp-action="Create">Create New</a>
@@ -29,7 +29,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.name)
             </td>
-            @if (SignInManager.IsSignedIn(User))
+            @if (SignInManager.IsSignedIn(User) && User.Identity.Name=="admin@gmail.com")
 {
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

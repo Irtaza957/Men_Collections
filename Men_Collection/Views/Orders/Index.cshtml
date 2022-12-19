@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Men_Collection.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name               
+            </th>
+            <th>
+                Image
+            </th>
+            <th>
+                Customer                
+            </th>
+            <th>
+                Status                
+            </th>
+            <th>
+                Last Updated               
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>           
+            <td>
+                @Html.DisplayFor(modelItem => item.Products.name)
+            </td>            
+            <td>                
+                 <img src="@Html.DisplayFor(modelItem => item.Products.image)" alt="@Html.DisplayFor(modelItem => item.Products.name)" height="80px" width="120px" class="rounded-circle">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Users.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>                
+                @Html.DisplayFor(modelItem => item.LastUpdated)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+               <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                    @if (item.Status == "Pending") {
+                        <a asp-action="Confirm" asp-route-id="@item.Id">Check</a>
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

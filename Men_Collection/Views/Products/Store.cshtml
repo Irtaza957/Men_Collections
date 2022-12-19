@@ -1,41 +1,48 @@
-﻿@model IEnumerable<Men_Collection.Models.Product>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model IEnumerable<Men_Collection.Models.Product>
 
 @{
     ViewData["Title"] = "Store";
 }
 <style>
-    .card {
+    .card{
+    margin-top: 10px;
     cursor: pointer;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-top:10px;
-    
 }
-
-   .card:hover {
-        box-shadow: -2px -1px 25px -4px rgba(0,0,0,0.75);
-        transition: 0.5s;
-    }
+.card:hover{
+    box-shadow: -2px -1px 25px -4px rgba(0,0,0,0.75);
+    transition: 0.5s;
+}
 </style>
 <div class="text-center">
     <h1 class="display-4">Products</h1>
 </div>
 <div class="row">
     @foreach (var product in Model)
-    {        
-        <div class="col-lg-4 text-center card">
-            <a asp-controller="Products" asp-action="Details" asp-route-id="@product.product_id">            
-            <div class="border-0 bg-light">
+    {                
+            <div class="col-lg-4 text-center">
+              <div class="card border-0 bg-light mb-2">
                 <div class="card-body">
-                    <img src="@product.image" alt="@product.name" height="200px" width="300px">
+                     <a asp-controller="Products" asp-action="Details" asp-route-id="@product.product_id">
+                  <img src="@product.image" alt="@product.name" height="200px" width="300px">
+                   </a>
                 </div>
-            </div>
-            </a>
-            <a asp-controller="Products" asp-action="Details" asp-route-id="@product.product_id">
-            <h6>@product.name</h6>
-            </a>
-            <p>$@product.price</p>
-            <button>Add to Cart</button>
+              </div >
+               <a asp-controller="Products" asp-action="Details" asp-route-id="@product.product_id">
+              <h6>@product.name</h6>
+               </a>
+               <p>$@product.price</p>
+            </div> 
+            @if (SignInManager.IsSignedIn(User) && User.Identity.Name=="admin@gmail.com")
+            {
+            <form asp-controller="Orders" asp-action="Create">
+                <input type="hidden" name="ProductId" value="@product.product_id" />
+                <input type="hidden" name="UserId" value="@UserManager.GetUserId(User)" />
+                <button id="btn" type="submit">Add to Cart</button>
+            </form>   
+            }
             </div>      
     }
 </div>

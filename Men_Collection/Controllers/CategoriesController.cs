@@ -136,7 +136,7 @@ namespace Men_Collection.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["Products"] = await _context.Product.Where<Product>(a => a.CategoryId == id).ToListAsync();
             return View(category);
         }
 
