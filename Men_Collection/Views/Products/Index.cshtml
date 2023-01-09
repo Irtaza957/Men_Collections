@@ -7,12 +7,20 @@
 }
 
 <h1>Index</h1>
+<div class="d-flex justify-content-between">
+    <div>
 @if (SignInManager.IsSignedIn(User) && User.Identity.Name=="admin@gmail.com")
 {
     <p>
         <a asp-action="Create">Create New</a>
     </p>
 }
+</div>
+<div>
+    <button><a asp-controller="Products" asp-action="Search"> Search </a></button>
+</div>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -38,7 +46,7 @@
                 @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>             
-                <img src="@Html.DisplayFor(modelItem => item.image)" alt="@Html.DisplayFor(modelItem => item.name)" height="80px" width="120px" class="rounded-circle">
+                4<img src="@Html.DisplayFor(modelItem => item.image)" alt="@Html.DisplayFor(modelItem => item.name)" height="80px" width="120px" class="rounded-circle">
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.price)

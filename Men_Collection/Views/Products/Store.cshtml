@@ -15,6 +15,20 @@
     box-shadow: -2px -1px 25px -4px rgba(0,0,0,0.75);
     transition: 0.5s;
 }
+.btn1{
+    height: 45px;
+    width: 35%;
+    border: none;
+    outline: none;
+    background-color: rgb(248 , 26 , 92);
+    color: black;
+    font-weight: 700;
+    border-radius: 60px;
+}
+.btn1:hover{
+    background-color: rgb(223 , 15 , 77);
+    transition: 0.5s;
+}
 </style>
 <div class="text-center">
     <h1 class="display-4">Products</h1>
@@ -33,16 +47,15 @@
                <a asp-controller="Products" asp-action="Details" asp-route-id="@product.product_id">
               <h6>@product.name</h6>
                </a>
-               <p>$@product.price</p>
-            </div> 
-            @if (SignInManager.IsSignedIn(User) && User.Identity.Name=="admin@gmail.com")
+               <p>$@product.price</p>            
+            @if (SignInManager.IsSignedIn(User) && User.Identity.Name!="admin@gmail.com")
             {
             <form asp-controller="Orders" asp-action="Create">
                 <input type="hidden" name="ProductId" value="@product.product_id" />
                 <input type="hidden" name="UserId" value="@UserManager.GetUserId(User)" />
-                <button id="btn" type="submit">Add to Cart</button>
+                <button id="btn" style="border:1px solid black; border-radius: 60px;" type="submit" class="btn1">Add to Cart</button>
             </form>   
-            }
-            </div>      
+            }               
+            </div> 
     }
 </div>

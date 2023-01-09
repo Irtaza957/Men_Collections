@@ -12,15 +12,14 @@ namespace Men_Collection.Services
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
             string fromMail = "irtaza010@gmail.com";
-            string fromPassword = "irtaza15";
+            string fromPassword = "14081947pak";
 
             MailMessage message = new MailMessage();
             message.From = new MailAddress(fromMail);
             message.Subject = subject;
             message.To.Add(new MailAddress(email));
             message.Body = "<html><body> " + htmlMessage + " </body></html>";
-            message.IsBodyHtml = true;
-
+            message.IsBodyHtml = true;           
             var smtpClient = new SmtpClient("smtp.gmail.com")
             {
                 Port = 587,
